@@ -18,8 +18,15 @@ class PlansController < ApplicationController
   end
 
   def edit
+    @plan = Plan.find(params[:id])
   end
 
+  def update
+    @plan = Plan.find(params[:id])
+    @plan.update(plan_params)
+    redirect_to plan_path(@plan)
+  end
+  
   private
   def plan_params
     params.require(:plan).permit(:title, :body, :image)
