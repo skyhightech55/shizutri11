@@ -30,6 +30,6 @@ class PlansController < ApplicationController
 
   private
   def plan_params
-    params.require(:plan).permit(:title, :body, :image, category_id)
+    params.require(:plan).permit(:title, :body, :image, { category_ids: [] })
   end
 end
