@@ -27,6 +27,11 @@
           </div>
 
           <div class="field">
+            <%= f.label :category_id, "カテゴリー", class: "label" %>
+            <%= f.collection_select(:category_id, Category.all, :id, :nema, {prompt: "選択してください"}) %>
+          </div>
+
+          <div class="field">
             <%= f.label :image, "写真", class: "label" %>
             <%= f.attachment_field :image, class: "input" %>
           </div>
