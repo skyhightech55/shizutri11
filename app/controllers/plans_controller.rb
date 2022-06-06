@@ -9,14 +9,31 @@ class PlansController < ApplicationController
 
   def new
     @plan = Plan.new
+    @plans = Plan.all
+    @category_parent_array = Category.category_parent_array_create
   end
 
   def create
     @plan = Plan.new(plan_params)
     @plan.user_id = current_user.id
     @plan.save
+    PlanCategory.maltilevel_category_create(
+      @book,
+      params[:parent_id],
+      params[:children_id],
+      params[:grandchildren_id]
+    )
     redirect_to plan_path(@plan)
   end
+
+  def get_category_children
+    @category_children = Category.find(params[:parent_id]).children
+  end
+  
+  def get_category_grandchildren
+    @category_grandchildren = Category.find(params[:children_id]).children
+  end
+  
 
   def edit
     @plan = Plan.find(params[:id])
