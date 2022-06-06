@@ -1,5 +1,6 @@
 class PlansController < ApplicationController
   def index
+    @plans = Plan.all
   end
 
   def show
@@ -26,7 +27,7 @@ class PlansController < ApplicationController
     @plan.update(plan_params)
     redirect_to plan_path(@plan)
   end
-  
+
   private
   def plan_params
     params.require(:plan).permit(:title, :body, :image)
