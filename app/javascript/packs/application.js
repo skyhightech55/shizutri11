@@ -4,10 +4,13 @@
 // that code so it'll be compiled.
 
 require("@rails/ujs").start()
+require("jquery")
 //require("turbolinks").start()
+//= require jquery // 追記
+
 require("@rails/activestorage").start()
 require("channels")
-require("jquery")
+
 require("../category_form") 
 
 

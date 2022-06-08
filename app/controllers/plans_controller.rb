@@ -3,9 +3,7 @@ class PlansController < ApplicationController
     @plans = Plan.all
   end
 
-  def show
-    @plan = Plan.find(params[:id])
-  end
+  
 
   def new
     @plan = Plan.new
@@ -16,14 +14,15 @@ class PlansController < ApplicationController
   def create
     @plan = Plan.new(plan_params)
     @plan.user_id = current_user.id
-    @plan.save
-    PlanCategory.maltilevel_category_create(
-      @book,
-      params[:parent_id],
-      params[:children_id],
-      params[:grandchildren_id]
-    )
+    if @plan.save
+      PlanCategory.maltilevel_category_create(
+        @plan,
+        params[:parent_id],
+        params[:children_id],
+        params[:grandchildren_id]
+      )
     redirect_to plan_path(@plan)
+    end
   end
 
   def get_category_children
@@ -35,6 +34,10 @@ class PlansController < ApplicationController
   end
   
 
+  def show
+    @plan = Plan.find(params[:id])
+  end
+  
   def edit
     @plan = Plan.find(params[:id])
   end
